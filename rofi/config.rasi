@@ -1,0 +1,7 @@
+/** Basic config file **/
+
+configuration {
+    kb-cancel: "Escape,Alt+j";
+  show-icons:         true;
+  icon-theme:         "Papirus";
+}
