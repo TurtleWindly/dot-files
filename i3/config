@@ -188,16 +188,22 @@ bindsym $mod+r mode "resize"
 
 # Minh config
 bindsym $mod+y exec firefox
-bindsym $mod+u exec brave-browser
+bindsym $mod+Shift+y exec brave-browser
 
 # rofi
 
-# launch app
+## launch app
 bindsym $mod+o exec "$HOME/.config/rofi/launchers/launcher.sh"
-# switch windows
+## switch windows
 bindsym $mod+Shift+o exec "$HOME/.config/rofi/launchers/window.sh"
-# run command
+## run command
 bindsym $mod+control+o exec "$HOME/.config/rofi/launchers/run.sh"
+
+## quicklink
+bindsym $mod+u exec "$HOME/.config/rofi/applets/applets/quicklinks.sh"
+
+## screen shot
+bindsym $mod+i exec "$HOME/.config/rofi/applets/applets/screenshot.sh"
 
 # boder style
 default_border pixel 1
