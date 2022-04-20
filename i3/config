@@ -191,8 +191,13 @@ bindsym $mod+y exec firefox
 bindsym $mod+u exec brave-browser
 
 # rofi
+
+# launch app
 bindsym $mod+o exec "$HOME/.config/rofi/launchers/launcher.sh"
+# switch windows
 bindsym $mod+Shift+o exec "$HOME/.config/rofi/launchers/window.sh"
+# run command
+bindsym $mod+control+o exec "$HOME/.config/rofi/launchers/run.sh"
 
 # boder style
 default_border pixel 1
