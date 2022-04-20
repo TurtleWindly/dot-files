@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-## Author  : Aditya Shakya
-## Mail    : adi1090x@gmail.com
-## Github  : @adi1090x
-## Twitter : @adi1090x
-
 style="$($HOME/.config/rofi/applets/applets/style.sh)"
 
 dir="$HOME/.config/rofi/applets/applets/configs/$style"
@@ -28,20 +23,20 @@ else
 fi
 
 # Links
-google=""
+youtube=""
 facebook=""
 twitter=""
 github=""
 mail=""
-youtube=""
+trello=""
 
 # Variable passed to rofi
-options="$google\n$facebook\n$twitter\n$github\n$mail\n$youtube"
+options="$youtube\n$facebook\n$github\n$twitter\n$mail\n$trello"
 
 chosen="$(echo -e "$options" | $rofi_command -p "Open In  :  $app" -dmenu -selected-row 0)"
 case $chosen in
-    $google)
-        $app https://www.google.com &
+    $youtube)
+        $app https://www.youtube.com &
         ;;
     $facebook)
         $app https://www.facebook.com &
@@ -55,8 +50,8 @@ case $chosen in
     $mail)
         $app https://www.gmail.com &
         ;;
-    $youtube)
-        $app https://www.youtube.com &
+    $trello)
+        $app https://www.trello.com &
         ;;
 esac
 
