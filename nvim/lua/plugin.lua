@@ -42,12 +42,6 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.g.indent_blankline_filetype = {''}
 
-require("indent_blankline").setup {
-    space_char_blankline = "",
-    show_current_context = true,
-    show_current_context_start = true,
-}
-
 -- Nvim tree
 require('nvim-tree').setup()
 
@@ -61,7 +55,7 @@ keymap('n', '<leader>t', ':FloatermToggle<cr>')
 vim.cmd[[colorscheme tokyonight]]
 
 -- Change buffer
-keymap('i', '<leader><Tab>', ':BufferLineCycleNext<cr>')
+keymap('i', '<leader><Tab>', '<Esc>:BufferLineCycleNext<cr>')
 keymap('n', '<leader><Tab>', ':BufferLineCycleNext<cr>')
 -- Close buffer
 keymap('n', '<leader>`', ':BufferLinePickClose<cr>')
