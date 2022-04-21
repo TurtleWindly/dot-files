@@ -1,9 +1,7 @@
 #!/bin/bash
 
-dir="$HOME/dot-files"
-# dir="$HOME/.config"
-old_config_dir="$HOME/dot-files/old_config"
-# old_config_dir="~/.config/oldConfig"
+dir="$HOME/.config"
+old_config_dir="$HOME/.config/old_config"
 
 function all_setup {
 
