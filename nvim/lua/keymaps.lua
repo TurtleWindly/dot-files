@@ -9,8 +9,7 @@ vim.g.mapLocalleader = ';'
 keymap('i', 'jj', '<Esc>')
 
 -- Save file
-keymap('i', '<leader>w', ':w<cr>')
-keymap('n', '<leader>w', ':w<cr>')
+keymap('n', '<leader>w', ':wq<cr>')
 
 -- Windows travel
 keymap('n', '<leader>h', '<C-w>h')
