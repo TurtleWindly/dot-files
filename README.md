@@ -27,19 +27,19 @@ sudo dnf install brave-browser
 ```
 
 ## ScreenShot
-![desktop](ScreenShot/desktop.png)
+![desktop](.ScreenShot/desktop.png)
 
 ### Launcher
-![launcher](ScreenShot/rofi_launcher.png)
+![launcher](.ScreenShot/rofi_launcher.png)
 
 ### ScreenShot Tool
-![ScreenShot Tool](ScreenShot/rofi_screenshot.png)
+![ScreenShot Tool](.ScreenShot/rofi_screenshot.png)
 
 ### Quick links
-![Quick links](ScreenShot/rofi_quicklinks.png)
+![Quick links](.ScreenShot/rofi_quicklinks.png)
 
 ### Powermenu
-![Powermenu](ScreenShot/rofi_powermenu.png)
+![Powermenu](.ScreenShot/rofi_powermenu.png)
 
 ## Rofi Inspirator
 Author of those styles: Aditya Shakya
