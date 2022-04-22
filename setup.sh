@@ -5,7 +5,7 @@ old_config_dir="$HOME/.config/old_config"
 
 function all_setup {
 
-    for program in `ls -I README.md -I *.sh -I old_config`; do
+    for program in `ls -d */`; do
         if find $dir/$program -name "$program" -type d &> /dev/null; then
             mv $dir/$program $old_config_dir
             cp -r $program $dir
@@ -17,7 +17,7 @@ function all_setup {
 
 function manual_setup {
 
-    for program in `ls -I README.md -I *.sh -I old_config`; do
+    for program in `ls -d */`; do
         local input=''
         while :
         do
