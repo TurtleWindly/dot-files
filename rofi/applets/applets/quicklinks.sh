@@ -13,6 +13,8 @@ msg() {
 # Browser
 if [[ -f /usr/bin/firefox ]]; then
 	app="firefox"
+elif [[ -f /usr/bin/brave-browser ]]; then
+	app="brave-browser"
 elif [[ -f /usr/bin/chromium ]]; then
 	app="chromium"
 elif [[ -f /usr/bin/midori ]]; then
