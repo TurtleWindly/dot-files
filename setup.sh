@@ -2,9 +2,19 @@
 
 dir="$HOME/.config"
 old_config_dir="$HOME/.config/old_config"
+FONT_DIR="$HOME/.local/share/fonts"
+
+function install_fonts {
+	if [[ -d "$FONT_DIR" ]]; then
+		cp -rf ./.fonts/* "$FONT_DIR"
+	else
+		mkdir -p "$FONT_DIR"
+		cp -rf ./.fonts/* "$FONT_DIR"
+	fi
+}
 
 function all_setup {
-
+    install_fonts
     for program in `ls -d */`; do
         if find $dir/$program -name "$program" -type d &> /dev/null; then
             mv $dir/$program $old_config_dir
@@ -17,6 +27,7 @@ function all_setup {
 
 function manual_setup {
 
+    install_fonts
     for program in `ls -d */`; do
         local input=''
         while :
