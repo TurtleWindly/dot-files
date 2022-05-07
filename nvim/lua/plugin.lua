@@ -65,7 +65,7 @@ keymap('n', '<leader>~', ':BufferLineCloseRight<cr>')
 keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
 keymap('n', '<leader>fg', ':Telescope git_status<cr>')
 
-require('telescope').setup{  defaults = { file_ignore_patterns = { "target" }} }
+require('telescope').setup{  defaults = { file_ignore_patterns = { "target", "Cargo.lock" }} }
 
 -- Autopairs
 require('nvim-autopairs').setup{}
