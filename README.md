@@ -5,7 +5,7 @@
 ### Everythings
 ```sh
 sudo dnf remove compton
-sudo dnf install xautolock rofi polybar picom viewnior scrot terminator
+sudo dnf install xautolock rofi polybar picom viewnior scrot terminator nodejs
 ```
 
 #### i3-gaps
