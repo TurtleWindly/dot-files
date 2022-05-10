@@ -10,9 +10,9 @@ sudo dnf install xautolock rofi polybar picom viewnior scrot terminator
 
 #### i3-gaps
 ```sh
-dnf remove i3
-dnf copr enable fuhrmann/i3-gaps
-dnf install i3-gaps
+sudo dnf remove i3
+sudo dnf copr enable fuhrmann/i3-gaps
+sudo dnf install i3-gaps
 ```
 
 #### Brave
