@@ -62,10 +62,10 @@ keymap('n', '<leader>`', ':BufferLinePickClose<cr>')
 keymap('n', '<leader>~', ':BufferLineCloseRight<cr>')
 
 -- Telescope
-keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+keymap('n', '<leader>ff', ':Telescope find_files<cr>')
 keymap('n', '<leader>fg', ':Telescope git_status<cr>')
 
-require('telescope').setup{  defaults = { file_ignore_patterns = { "target", "Cargo.lock" }} }
+require('telescope').setup{  defaults = { file_ignore_patterns = { "target", "Cargo.lock", ".png" }} }
 
 -- Autopairs
 require('nvim-autopairs').setup{}

@@ -10,3 +10,6 @@ vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.opt.encoding ="utf-8"
 vim.opt.formatoptions = 'jql'
+
+-- Change default shell
+vim.opt.shell = "zsh"
