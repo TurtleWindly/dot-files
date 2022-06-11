@@ -39,7 +39,7 @@ sudo dnf install brave-browser
 ![Quick links](.ScreenShot/rofi_quicklinks.png)
 
 ### Powermenu
-![Powermenu](.ScreenShot/rofi_powermenu.png)
+![Powermenu](.ScreenShot/rofi_power_menu.png)
 
 ## Rofi Inspirator
 Author of those styles: Aditya Shakya
