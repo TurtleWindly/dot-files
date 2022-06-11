@@ -48,6 +48,6 @@ case $chosen in
 			fi
         ;;
     $radio)
-        play "~/Musics/Ricna circulation.ogg"
+        play "~/.config/rofi/powermenu/Ricna circulation.ogg"
         ;;
 esac
