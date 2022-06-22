@@ -26,7 +26,6 @@ require('packer').startup(function()
    }
    use 'voldikss/vim-floaterm'
    use 'junegunn/vim-easy-align'
-   -- use 'nvim-treesitter/nvim-treesitter'
    use {'neoclide/coc.nvim', branch = 'release'}
 
 end)
@@ -77,15 +76,3 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 ]]
-
--- tree sitter
--- local configs = require'nvim-treesitter.configs'
--- configs.setup {
---     ensure_installed = "maintained", -- Only use parsers that are maintained
---     highlight = { -- enable highlighting
---       enable = true, 
---     },
---     indent = {
---       enable = false, -- default is disabled anyways
---     }
--- }
