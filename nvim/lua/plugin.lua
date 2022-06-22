@@ -1,4 +1,3 @@
-
 local function keymap(mode, keys, mapping)
    vim.api.nvim_set_keymap(mode, keys, mapping, { noremap = true })
 end
@@ -11,9 +10,9 @@ require('packer').startup(function()
    requires = { {'nvim-lua/plenary.nvim'} }
    }
    use 'glepnir/dashboard-nvim'
-   -- use {
-   --     'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons',
-   -- }
+   use {
+       'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons',
+   }
    use "lukas-reineke/indent-blankline.nvim"
    use {
    'kyazdani42/nvim-tree.lua',
@@ -36,7 +35,6 @@ end)
 vim.cmd[[colorscheme tokyonight]]
 
 vim.opt.termguicolors = true
--- require("bufferline").setup{}
 
 -- Blankline
 vim.opt.list = true
@@ -51,11 +49,12 @@ keymap('t', '<leader>t', '<C-\\><C-n>:FloatermToggle<cr>')
 keymap('n', '<leader>t', ':FloatermToggle<cr>')
 
 -- Change buffer
--- keymap('i', '<leader><Tab>', '<Esc>:BufferLineCycleNext<cr>')
--- keymap('n', '<leader><Tab>', ':BufferLineCycleNext<cr>')
+require("bufferline").setup{}
+keymap('i', '<leader><Tab>', '<Esc>:BufferLineCycleNext<cr>')
+keymap('n', '<leader><Tab>', ':BufferLineCycleNext<cr>')
 -- Close buffer
--- keymap('n', '<leader>`', ':BufferLinePickClose<cr>')
--- keymap('n', '<leader>~', ':BufferLineCloseRight<cr>')
+keymap('n', '<leader>`', ':BufferLinePickClose<cr>')
+keymap('n', '<leader>~', ':BufferLineCloseRight<cr>')
 
 -- Telescope
 keymap('n', '<leader>ff', ':Telescope find_files<cr>')
