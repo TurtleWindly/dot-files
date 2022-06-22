@@ -15,17 +15,6 @@ sudo dnf copr enable fuhrmann/i3-gaps
 sudo dnf install i3-gaps
 ```
 
-#### Brave
-```sh
-sudo dnf install dnf-plugins-core
-
-sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-
-sudo dnf install brave-browser
-```
-
 ## ScreenShot
 ![desktop](.ScreenShot/desktop.png)
 
