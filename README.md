@@ -8,6 +8,12 @@ sudo dnf remove compton
 sudo dnf install xautolock rofi sox polybar picom viewnior scrot terminator nodejs lollypop
 ```
 
+#### unikey
+You will need to change the input method. I do it using xfce4 settings. Having xfce4 along i3 is pretty good.
+```sh
+sudo dnf install ibus-unikey
+```
+
 #### i3-gaps
 ```sh
 sudo dnf remove i3
