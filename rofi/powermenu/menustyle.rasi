@@ -1,12 +1,3 @@
-/*
- *
- * Author  : Aditya Shakya
- * Mail    : adi1090x@gmail.com
- * Github  : @adi1090x
- * Twitter : @adi1090x
- *
- */
-
 configuration {
 	font:							"FantasqueSansMono Nerd Font 14";
     show-icons:                     false;
@@ -24,10 +15,10 @@ window {
     text-color:                     @foreground;
     border-radius:                  0px;
     height:                         30%;
-    width:                          12.25%;
+    width:                          12%;
     location:                       east;
-    x-offset:                       -10;
-    y-offset:                       -235;
+    x-offset:                       -12;
+    y-offset:                       -32%;
 }
 
 listview {
@@ -43,8 +34,8 @@ listview {
 mainbox {
     background-color:               @background;
     children:                       [ listview ];
-    spacing:                        3%;
-    padding:                        4% 2% 0% 2%;
+    spacing:                        1%;
+    padding:                        4% 2% 4% 2%;
 }
 
 element {
@@ -57,7 +48,7 @@ element {
 element-text {
     background-color: 				#00000000;
     text-color:       				inherit;
-	font:							"feather 24";
+	font:							"feather 32";
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
@@ -89,4 +80,3 @@ element selected.active {
     background-color:               @background-alt;
     color:                          @foreground;
 }
-
