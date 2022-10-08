@@ -9,7 +9,7 @@ BG="#000000aa"
 FG="#DDDDDDff"
 SELECT="#afffaaff"
 
-ACCENT="#FA8334"
+ACCENT="#a44a3f"
 
 # overwrite colors file
 cat > $dir/colors.rasi <<- EOF
