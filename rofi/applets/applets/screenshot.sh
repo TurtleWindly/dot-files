@@ -20,7 +20,7 @@ chosen="$(echo -e "$list" | $rofi_command -p 'scrot' -dmenu -selected-row 0)"
 case $chosen in
     $screen)
 		if [[ -f /usr/bin/scrot ]]; then
-            ./camera.sh
+            ~/.config/rofi/applets/applets/camera.sh
 		else
 			msg
 		fi
