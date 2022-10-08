@@ -5,7 +5,7 @@
 ### Everythings
 ```sh
 sudo dnf remove compton
-sudo dnf install xautolock rofi sox polybar picom viewnior scrot terminator nodejs lollypop
+sudo dnf install xautolock rofi sox polybar picom viewnior scrot terminator nodejs light
 ```
 
 #### unikey
