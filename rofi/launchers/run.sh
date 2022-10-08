@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env bash
 
 theme="style"
 dir="$HOME/.config/rofi/launchers"
