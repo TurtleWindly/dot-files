@@ -42,8 +42,8 @@ Author github [page](https://github.com/adi1090x/rofi)
 
 Even through I need to fix a lot of ___bugs___ in styles. But without they I don't even know how to config all of that.
 
-## Why there is Arch logo ?
-Well it is my network signal. I can't find any good looking wifi bar so I decide to use the speed and my favorite browsers. But I can't find brave icon so linux distro fix that. Some time it confused but ! I use Arch btw.
+## Why there is Fedora logo ?
+Well it is my network signal. I can't find any good looking wifi bar so I decide to use the speed and my favorite browsers. But I can't find brave icon so linux distro fix that. Some time it confused but ! I have used Arch btw.
 
 __Fact:__ I put Internet explorer at the less wifi bar.
 
