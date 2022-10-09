@@ -197,8 +197,7 @@ default_border pixel 1
 default_floating_border pixel 1
 
 # Background
-exec feh --bg-scale ~/.config/i3/Onodera.png
-# exec feh --bg-scale /usr/share/backgrounds/start.jpg
+exec feh --bg-scale ~/.config/i3/Onodera.jpg
 
 # lock screen
 bindsym $mod+Shift+p exec "$HOME/.config/rofi/powermenu/powermenu.sh"
