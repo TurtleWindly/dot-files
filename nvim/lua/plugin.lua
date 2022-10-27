@@ -14,10 +14,6 @@ require('packer').startup(function()
        'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons',
    }
    use "lukas-reineke/indent-blankline.nvim"
-   use {
-   'kyazdani42/nvim-tree.lua',
-   config = function() require'nvim-tree'.setup {} end
-   }
    use 'tpope/vim-commentary'
    use 'windwp/nvim-autopairs'
    use {
@@ -40,9 +36,6 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.g.indent_blankline_filetype = {'dashboard'}
 
--- Nvim tree
-keymap('n', '<leader>v', ':NvimTreeToggle<cr>')
-
 -- vim Floaterm
 keymap('t', '<leader>t', '<C-\\><C-n>:FloatermToggle<cr>')
 keymap('n', '<leader>t', ':FloatermToggle<cr>')
@@ -59,7 +52,17 @@ keymap('n', '<leader>~', ':BufferLineCloseRight<cr>')
 keymap('n', '<leader>ff', ':Telescope find_files<cr>')
 keymap('n', '<leader>fg', ':Telescope git_status<cr>')
 
-require('telescope').setup{  defaults = { file_ignore_patterns = { "target", "Cargo.lock", ".png" }} }
+require('telescope').setup{  defaults = { file_ignore_patterns = { 
+   "target",
+   "public",
+   "Cargo.lock",
+   ".png",
+   ".jpg",
+   ".svg",
+   ".ogg",
+   ".wav",
+   ".mp3"
+}} }
 
 -- Autopairs
 require('nvim-autopairs').setup{}
