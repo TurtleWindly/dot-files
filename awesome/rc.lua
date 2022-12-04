@@ -18,6 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+require("volume")
+
 package.loaded["awful.hotkeys_popup.keys.tmux"] = {}
 
 -- {{{ Error handling
@@ -67,7 +69,7 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
-    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.max,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -106,15 +108,54 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock( "%d-%m-%Y" )
+mytextclock = wibox.widget.textclock( "%b %d, %H:%M" )
+
+-- Volume textbox
+myvolume = awful.widget.watch("amixer sget Master | grep 'Right:' | awk -F '[][]' '{print $2}'| sed 's/[^0-9]//g'")
+
+-- Brightness textbox
+mylight  = awful.widget.watch("zsh -c 'echo $(light -G)'")
 
 -- Battery text block
 mybattery = awful.widget.watch("zsh -c 'echo $(cat /sys/class/power_supply/BAT0/capacity)%'", 120)
+battery_capacity = "cat /sys/class/power_supply/BAT0/capacity"
+battery_is_charging = "echo $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state)"
+isCharging = "no"
+
+function battery_notification(title, text)
+    naughty.notify({
+        title = title,
+        text  = text,
+        timeout = 5,
+    })
+end
+
+
+battery_timer = gears.timer {
+    timeout = 180,
+    autostart = true,
+    callback = function()
+        awful.spawn.easy_async_with_shell(battery_capacity, function(out)
+            local capacity = tonumber(out)
+
+            awful.spawn.easy_async_with_shell(battery_is_charging, function(state)
+                if state:match("discharging") then
+                    isCharging = "false"
+                else
+                    isCharging = "true"
+                end
+            end)
+
+            if capacity < 20 and isCharging == "false" then
+                battery_notification("Batter is Low !", "You probably need to charge the laptop" )
+            elseif capacity > 85 and isCharging == "true" then
+                battery_notification("Batter charged completed !", "Unplug to help battery not to go fire !" )
+            end
+        end)
+    end
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -177,8 +218,8 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     local l = awful.layout.suit  -- Just to save some typing: use an alias.
-    local names   = { "firefox", "terminal", "lab", "sound", "game", "linh tinh"}
-    local layouts = {l.tile,     l.tile,    l.tile, l.tile, l.tile, l.floating}
+    local names   = { "", "", "", "", "", ""}
+    local layouts = {l.tile, l.tile, l.tile, l.tile, l.tile, l.floating}
     awful.tag(names, s, layouts)
 
     -- Create a promptbox for each screen
@@ -195,7 +236,23 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        widget_template = {
+                {
+                    {
+                        {
+                            id     = 'text_role',
+                            widget = wibox.widget.textbox,
+                        },
+                        layout = wibox.layout.fixed.horizontal,
+                    },
+                    left  = 15,
+                    right = 15,
+                    widget = wibox.container.margin
+                },
+            id     = 'background_role',
+            widget = wibox.container.background,
+        },
     }
 
     -- Create a tasklist widget
@@ -213,19 +270,21 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            spacing = 10,
+            s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
+        }, -- Middle widget
+            s.mytasklist,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            mykeyboardlayout,
-            mytextclock,
             spacing = 10,
+            wibox.widget.systray(),
+            mytextclock,
+            myvolume,
+            mylight,
             mybattery,
-            s.mylayoutbox,
+            mylauncher,
         },
     }
 end)
@@ -342,6 +401,17 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
+    -- Light Key
+    awful.key({ }, "XF86MonBrightnessDown", function()
+        awful.util.spawn("light -U 5")
+    end,
+    {description = "lower light", group = "fn"}),
+
+    awful.key({ }, "XF86MonBrightnessUp", function()
+        awful.util.spawn("light -A 5")
+    end,
+    {description = "raise light", group = "fn"}),
+
     -- Volume Key
     awful.key({ }, "XF86AudioMute", function()
         awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
@@ -349,12 +419,12 @@ globalkeys = gears.table.join(
     {description = "mute volume", group = "fn"}),
 
     awful.key({ }, "XF86AudioLowerVolume", function()
-        awful.util.spawn("amixer set Master 5%-")
+        awful.util.spawn("amixer set Master 2%-")
     end,
     {description = "lower volume", group = "fn"}),
 
     awful.key({ }, "XF86AudioRaiseVolume", function()
-        awful.util.spawn("amixer set Master 5%+")
+        awful.util.spawn("amixer set Master 2%+")
     end,
     {description = "raise volume", group = "fn"})
 
@@ -519,9 +589,12 @@ awful.rules.rules = {
         }
       }, properties = { floating = true }},
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
+    -- Set Firefox to always map on the tag named "firefox" on screen 1.
     { rule = { class = "firefox" },
-    properties = { screen = 1, tag = "firefox" } },
+    properties = { screen = 1, tag = "" } },
+
+    { rule = { class = "discord" },
+    properties = { screen = 1, tag = "" } },
 }
 -- }}}
 
@@ -553,5 +626,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 beautiful.useless_gap = 5
 
 -- Auto startup
+awful.spawn.with_shell("Discord")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("light -S 40")
+awful.spawn.with_shell("amixer -D default sset Master Playback 35%")
