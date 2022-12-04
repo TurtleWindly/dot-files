@@ -39,6 +39,7 @@ vim.g.indent_blankline_filetype = {'dashboard'}
 -- vim Floaterm
 keymap('t', '<leader>t', '<C-\\><C-n>:FloatermToggle<cr>')
 keymap('n', '<leader>t', ':FloatermToggle<cr>')
+keymap('n', '<leader>2', ':FloatermNew<cr>')
 
 -- Change buffer
 require("bufferline").setup{}
