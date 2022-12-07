@@ -2,24 +2,35 @@
 
 ## Dependencies
 
-### Everythings
+### Required
 ```sh
-sudo dnf remove compton
-sudo dnf install xautolock rofi sox polybar picom viewnior scrot terminator nodejs light
+sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol nautilus
+```
+
+#### Awesome WM
+```sh
+sudo dnf install awesome rofi picom
+```
+
+#### Flathub
+```sh
+flatpak remote-modify --enable flathub
+```
+#### Font manager
+```sh
+flatpak install flathub org.gnome.FontManager
 ```
 
 #### unikey
-You will need to change the input method. I do it using xfce4 settings. Having xfce4 along i3 is pretty good.
 ```sh
 sudo dnf install ibus-unikey
 ```
 
-#### i3-gaps
+#### icon theme
 ```sh
-sudo dnf remove i3
-sudo dnf copr enable fuhrmann/i3-gaps
-sudo dnf install i3-gaps
+sudo dnf install papirus-icon-theme
 ```
+
 
 ## ScreenShot
 ![desktop](.ScreenShot/desktop.png)
@@ -42,9 +53,10 @@ Author github [page](https://github.com/adi1090x/rofi)
 
 Even through I need to fix a lot of ___bugs___ in styles. But without they I don't even know how to config all of that.
 
-## Why there is Fedora logo ?
-Well it is my network signal. I can't find any good looking wifi bar so I decide to use the speed and my favorite browsers. But I can't find brave icon so linux distro fix that. Some time it confused but ! I have used Arch btw.
+## Awesome widget greatest Hero
+Author of most widget: Pavel Makhov
+Github [page](https://github.com/streetturtle/awesome-wm-widgets) of widget cpu, brightness, sound, logout menu
 
-__Fact:__ I put Internet explorer at the less wifi bar.
+Also a really cool [website](http://pavelmakhov.com/awesome-wm-widgets/) for more widget
 
 ## Team Onodera hurray

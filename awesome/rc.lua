@@ -18,8 +18,13 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
-require("volume")
+local brightness_widget = require("brightness")
+local volume_widget = require("volume-widget.volume")
+local battery_widget = require("battery-widget")
+local cpu_widget = require("cpu-widget")
+local logout_menu_widget = require("logout-menu")
 
+-- No tmux key
 package.loaded["awful.hotkeys_popup.keys.tmux"] = {}
 
 -- {{{ Error handling
@@ -69,7 +74,6 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
-    awful.layout.suit.max,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -101,9 +105,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -114,48 +115,6 @@ mytextclock = wibox.widget.textclock( "%b %d, %H:%M" )
 
 -- Volume textbox
 myvolume = awful.widget.watch("amixer sget Master | grep 'Right:' | awk -F '[][]' '{print $2}'| sed 's/[^0-9]//g'")
-
--- Brightness textbox
-mylight  = awful.widget.watch("zsh -c 'echo $(light -G)'")
-
--- Battery text block
-mybattery = awful.widget.watch("zsh -c 'echo $(cat /sys/class/power_supply/BAT0/capacity)%'", 120)
-battery_capacity = "cat /sys/class/power_supply/BAT0/capacity"
-battery_is_charging = "echo $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state)"
-isCharging = "no"
-
-function battery_notification(title, text)
-    naughty.notify({
-        title = title,
-        text  = text,
-        timeout = 5,
-    })
-end
-
-
-battery_timer = gears.timer {
-    timeout = 180,
-    autostart = true,
-    callback = function()
-        awful.spawn.easy_async_with_shell(battery_capacity, function(out)
-            local capacity = tonumber(out)
-
-            awful.spawn.easy_async_with_shell(battery_is_charging, function(state)
-                if state:match("discharging") then
-                    isCharging = "false"
-                else
-                    isCharging = "true"
-                end
-            end)
-
-            if capacity < 20 and isCharging == "false" then
-                battery_notification("Batter is Low !", "You probably need to charge the laptop" )
-            elseif capacity > 85 and isCharging == "true" then
-                battery_notification("Batter charged completed !", "Unplug to help battery not to go fire !" )
-            end
-        end)
-    end
-}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -215,6 +174,10 @@ screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
+
+    -- toggleable system tray icon
+    s.systray = wibox.widget.systray()
+    s.systray.visible = false
 
     -- Each screen has its own tag table.
     local l = awful.layout.suit  -- Just to save some typing: use an alias.
@@ -277,14 +240,24 @@ awful.screen.connect_for_each_screen(function(s)
         }, -- Middle widget
             s.mytasklist,
         { -- Right widgets
+            s.systray,
             layout = wibox.layout.fixed.horizontal,
             spacing = 10,
-            wibox.widget.systray(),
             mytextclock,
-            myvolume,
-            mylight,
-            mybattery,
-            mylauncher,
+            brightness_widget {
+                type = "icon_and_text",
+                program = "light",
+                step = 2,
+            },
+            volume_widget {
+                widget_type = "icon_and_text",
+            },
+            cpu_widget {
+                width = 30,
+                step_spacing = 0,
+            },
+            battery_widget(),
+            logout_menu_widget(),
         },
     }
 end)
@@ -292,9 +265,8 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 1, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
 ))
 -- }}}
 
@@ -349,11 +321,26 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "y", function () awful.spawn("firefox") end,
               {description = "open firefox", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () awful.spawn("nautilus") end,
+              {description = "open file manager", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "e", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
+    -- Rofi
+    awful.key({ modkey,           }, "o", function () awful.spawn.with_shell("~/.config/rofi/launchers/launcher.sh ") end,
+              {description = "app launcher", group = "rofi"}),
+    awful.key({ modkey, "Shift"   }, "o", function () awful.spawn.with_shell("~/.config/rofi/launchers/window.sh") end,
+              {description = "windows switcher", group = "rofi"}),
+    awful.key({ modkey, "Control" }, "o", function () awful.spawn.with_shell("~/.config/rofi/launchers/run.sh") end,
+              {description = "run promt", group = "rofi"}),
+    awful.key({ modkey,           }, "u", function () awful.spawn.with_shell("~/.config/rofi/applets/applets/quicklinks.sh") end,
+              {description = "quicklink launcher", group = "rofi"}),
+    awful.key({ modkey,           }, "i", function () awful.spawn.with_shell("~/.config/rofi/applets/applets/screenshot.sh") end,
+              {description = "screenshot launcher", group = "rofi"}),
+
+    -- Layout
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -383,48 +370,36 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
+    -- Toggle system tray icon
+    awful.key({ modkey }, "=", function ()
+        awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
+    end,
+    {description = "Toggle systray visibility", group = "custom"}),
 
     -- Light Key
     awful.key({ }, "XF86MonBrightnessDown", function()
-        awful.util.spawn("light -U 5")
+        brightness_widget:dec()
     end,
     {description = "lower light", group = "fn"}),
 
     awful.key({ }, "XF86MonBrightnessUp", function()
-        awful.util.spawn("light -A 5")
+        brightness_widget:inc()
     end,
     {description = "raise light", group = "fn"}),
 
     -- Volume Key
     awful.key({ }, "XF86AudioMute", function()
-        awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        volume_widget:toggle()
     end,
     {description = "mute volume", group = "fn"}),
 
     awful.key({ }, "XF86AudioLowerVolume", function()
-        awful.util.spawn("amixer set Master 2%-")
+        volume_widget:dec(5)
     end,
     {description = "lower volume", group = "fn"}),
 
     awful.key({ }, "XF86AudioRaiseVolume", function()
-        awful.util.spawn("amixer set Master 2%+")
+        volume_widget:inc(5)
     end,
     {description = "raise volume", group = "fn"})
 
@@ -626,7 +601,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 beautiful.useless_gap = 5
 
 -- Auto startup
-awful.spawn.with_shell("Discord")
 awful.spawn.with_shell("picom")
-awful.spawn.with_shell("light -S 40")
-awful.spawn.with_shell("amixer -D default sset Master Playback 35%")
+awful.spawn.with_shell("light -S 32")
+awful.spawn.with_shell("amixer -D default sset Master 35%")
