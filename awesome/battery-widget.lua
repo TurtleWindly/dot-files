@@ -53,25 +53,27 @@ local function worker(user_args)
             end
     }
 
-    local function update_state()
+    local function update_state(capacity)
         awful.spawn.easy_async_with_shell(battery_charging_cmd, function(out)
             if out:match("discharging") then
                 is_discharging = true
             else
                 is_discharging = false
             end
+
+            -- notification if battery is low or charged completed
+            if capacity < battery_low and is_discharging then
+                battery_notification("Batter is Low !", "You probably need to charge the laptop" )
+            elseif capacity > battery_high and not is_discharging then
+                battery_notification("Batter charged completed !", "Unplug to help battery not to go fire !" )
+            end
         end)
     end
 
     local update_widget = function(widget, out, _, _, _)
         local capacity = tonumber(out)
-        update_state()
-        -- notification if battery is low or charged completed
-        if capacity < battery_low and is_discharging then
-            battery_notification("Batter is Low !", "You probably need to charge the laptop" )
-        elseif capacity > battery_high and not is_discharging then
-            battery_notification("Batter charged completed !", "Unplug to help battery not to go fire !" )
-        end
+        update_state(capacity)
+
         widget:set_value(out)
     end
 

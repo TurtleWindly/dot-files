@@ -58,7 +58,8 @@ beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
-editor = os.getenv("nvim") or "vi"
+file_manager = "nautilus"
+editor = os.getenv("gnome-text-editor") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 -- Set not to get maximum windows to tile
 minimized = true
@@ -92,16 +93,12 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+mymainmenu = awful.menu({ items = {
+                                    { "    Note", function() awful.spawn.with_shell(editor_cmd "note.txt") end},
+                                    { "   Terminal", terminal},
+                                    { "   Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end},
+                                    { "   Restart", awesome.restart }
                                   }
                         })
 
@@ -321,7 +318,7 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "y", function () awful.spawn("firefox") end,
               {description = "open firefox", group = "launcher"}),
-    awful.key({ modkey,           }, "e", function () awful.spawn("nautilus") end,
+    awful.key({ modkey,           }, "e", function () awful.spawn(file_manager) end,
               {description = "open file manager", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -550,6 +547,7 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
+          "debug",
           "xtightvncviewer"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client

@@ -15,6 +15,18 @@ local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local utils = require("volume-widget.utils")
 
+-- Battery 'popup'
+local naughty = require("naughty")
+
+local function volume_popup(title, text)
+    naughty.notify({
+        title = title,
+        text  = text,
+        timeout = 0.5,
+    })
+end
+
+
 
 local LIST_DEVICES_CMD = [[sh -c "pacmd list-sinks; pacmd list-sources"]]
 local function GET_VOLUME_CMD(device) return 'amixer -D ' .. device .. ' sget Master' end
@@ -159,17 +171,23 @@ local function worker(user_args)
         if mute == 'off' then widget:mute()
         elseif mute == 'on' then widget:unmute()
         end
-        local volume_level = string.match(stdout, "(%d?%d?%d)%%") -- (\d?\d?\d)\%)
-        volume_level = string.format("% 3d", volume_level)
-        widget:set_volume_level(volume_level)
+        volume.level = string.match(stdout, "(%d?%d?%d)%%") -- (\d?\d?\d)\%)
+        volume.level = string.format("% 3d", volume.level)
+        widget:set_volume_level(volume.level)
     end
 
     function volume:inc(s)
-        spawn.easy_async(INC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(volume.widget, stdout) end)
+        spawn.easy_async(INC_VOLUME_CMD(device, s or step), function(stdout)
+            update_graphic(volume.widget, stdout)
+            volume_popup("Volume", volume.level)
+        end)
     end
 
     function volume:dec(s)
-        spawn.easy_async(DEC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(volume.widget, stdout) end)
+        spawn.easy_async(DEC_VOLUME_CMD(device, s or step), function(stdout)
+            update_graphic(volume.widget, stdout)
+            volume_popup("Volume", volume.level)
+        end)
     end
 
     function volume:toggle()
