@@ -31,6 +31,11 @@ sudo dnf install ibus-unikey
 sudo dnf install papirus-icon-theme
 ```
 
+#### LXAppearance
+```sh
+sudo dnf install lxappearance
+```
+
 
 ## ScreenShot
 ![desktop](.ScreenShot/desktop.png)
