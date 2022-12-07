@@ -240,6 +240,10 @@ awful.screen.connect_for_each_screen(function(s)
             s.systray,
             layout = wibox.layout.fixed.horizontal,
             spacing = 10,
+            cpu_widget {
+                width = 40,
+                step_spacing = 0,
+            },
             mytextclock,
             brightness_widget {
                 type = "icon_and_text",
@@ -248,10 +252,6 @@ awful.screen.connect_for_each_screen(function(s)
             },
             volume_widget {
                 widget_type = "icon_and_text",
-            },
-            cpu_widget {
-                width = 30,
-                step_spacing = 0,
             },
             battery_widget(),
             logout_menu_widget(),

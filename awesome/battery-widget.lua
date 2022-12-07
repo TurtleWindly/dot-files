@@ -45,7 +45,6 @@ local function worker(user_args)
                 id = 'txt',
                 widget = wibox.widget.textbox
             },
-            spacing = 4,
             layout = wibox.layout.fixed.horizontal,
             set_value = function(self, level)
                 local display_level = level

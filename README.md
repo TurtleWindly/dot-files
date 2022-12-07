@@ -12,6 +12,11 @@ sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontr
 sudo dnf install awesome rofi picom
 ```
 
+#### Image viewer
+```sh
+sudo dnf install ristretto
+```
+
 #### Flathub
 ```sh
 flatpak remote-modify --enable flathub
