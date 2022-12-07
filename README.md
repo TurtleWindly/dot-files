@@ -17,9 +17,9 @@ sudo dnf install awesome rofi picom
 sudo dnf install ristretto
 ```
 
-#### Flathub
+#### Flatpak
 ```sh
-flatpak remote-modify --enable flathub
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 #### Font manager
 ```sh
