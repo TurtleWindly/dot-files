@@ -254,7 +254,9 @@ awful.screen.connect_for_each_screen(function(s)
                 widget_type = "icon_and_text",
             },
             battery_widget(),
-            logout_menu_widget(),
+            logout_menu_widget {
+		    onlock = function() awful.spawn.with_shell("betterlockscreen -l dim --off 10 -- --layout-pos='ix-1000:iy+1000'") end,
+	    },
         },
     }
 end)
@@ -602,3 +604,6 @@ beautiful.useless_gap = 5
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("light -S 32")
 awful.spawn.with_shell("amixer -D default sset Master 35%")
+-- Auto lock screen after 5 minutes
+awful.spawn.with_shell("xset s 300")
+awful.spawn.with_shell("xss-lock ~/.local/bin/lock-screen.sh +resetsaver")

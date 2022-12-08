@@ -63,6 +63,7 @@ local function worker(user_args)
             -- notification if battery is low or charged completed
             if capacity < battery_low and is_discharging then
                 battery_notification("Batter is Low !", "You probably need to charge the laptop" )
+		awful.spawn.with_shell("light -S 20")
             elseif capacity > battery_high and not is_discharging then
                 battery_notification("Batter charged completed !", "Unplug to help battery not to go fire !" )
             end
