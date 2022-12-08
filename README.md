@@ -9,12 +9,19 @@ sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontr
 
 #### Awesome WM
 ```sh
-sudo dnf install awesome rofi picom
+sudo dnf install awesome rofi picom xset xss-lock
+```
+
+#### Betterlockscreen
+Other dependencies should be manually install
+```sh
+sudo dnf copr enable tokariew/i3lock-color
+sudo dnf install i3lock-color imagemagick xrandr xrdb xdpyinfo
 ```
 
 #### Image viewer
 ```sh
-sudo dnf install ristretto
+sudo dnf install ristretto feh
 ```
 
 #### Flatpak

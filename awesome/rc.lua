@@ -59,6 +59,7 @@ beautiful.init("~/.config/awesome/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
 file_manager = "nautilus"
+gui_editor = "gnome-text-editor"
 editor = os.getenv("gnome-text-editor") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 -- Set not to get maximum windows to tile
@@ -95,7 +96,7 @@ awful.layout.layouts = {
 -- Create a launcher widget and a main menu
 
 mymainmenu = awful.menu({ items = {
-                                    { "    Note", function() awful.spawn.with_shell(editor_cmd "note.txt") end},
+                                    { "    Note", function() awful.spawn.with_shell(gui_editor.." Text/note.txt") end},
                                     { "   Terminal", terminal},
                                     { "   Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end},
                                     { "   Restart", awesome.restart }
