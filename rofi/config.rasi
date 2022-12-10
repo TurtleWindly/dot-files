@@ -4,4 +4,5 @@ configuration {
       kb-cancel: "Escape,Alt+j";
       show-icons:         true;
       icon-theme:         "Papirus";
+      terminal: 	  "/usr/bin/terminator";
 }

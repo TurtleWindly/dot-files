@@ -607,7 +607,8 @@ awful.spawn.with_shell("light -S 32")
 awful.spawn.with_shell("amixer -D default sset Master 35%")
 -- Polkit agent
 awful.spawn.with_shell("/usr/libexec/polkit-gnome-authentication-agent-1 &")
---awful.spawn.with_shell("")
+-- No More Beep sound (Fedora)
+awful.spawn.with_shell("xset b off")
 -- Auto lock screen after 5 minutes
 awful.spawn.with_shell("xset s 300")
 awful.spawn.with_shell("xss-lock ~/.local/bin/lock-screen.sh +resetsaver")
