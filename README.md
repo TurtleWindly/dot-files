@@ -9,7 +9,7 @@ sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontr
 
 #### Awesome WM
 ```sh
-sudo dnf install awesome rofi picom xset xss-lock
+sudo dnf install awesome rofi picom xset xss-lock polkit-gnome
 ```
 
 #### Betterlockscreen
