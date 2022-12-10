@@ -1,0 +1,10 @@
+theme = "tokyonight"
+
+[editor]
+line-number = "relative"
+mouse = false
+
+[editor.indent-guides]
+render = true
+character = "▏"
+skip-levels = 1
