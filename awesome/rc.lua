@@ -603,6 +603,8 @@ beautiful.useless_gap = 5
 
 -- Auto startup
 awful.spawn.with_shell("picom")
+awful.spawn.with_shell("ibus-daemon -d")
+awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("light -S 32")
 awful.spawn.with_shell("amixer -D default sset Master 35%")
 -- Polkit agent
