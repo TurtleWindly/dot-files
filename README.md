@@ -24,6 +24,11 @@ sudo dnf install i3lock-color imagemagick xrandr xrdb xdpyinfo
 sudo dnf install ristretto feh
 ```
 
+#### GoogleDrive
+```sh
+sudo dnf install rclone rclone-browser
+```
+
 #### Flatpak
 ```sh
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
