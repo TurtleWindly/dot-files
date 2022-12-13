@@ -25,11 +25,15 @@ theme.fg_focus      = "#ddd"
 theme.fg_urgent     = "#ddd"
 theme.fg_minimize   = "#777"
 
+theme.gap_single_client  = false
+
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
+
+theme.notification_font = "NotoSans 14"
 
 -- There are other variable sets
 -- overriding the default one when

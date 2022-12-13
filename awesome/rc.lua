@@ -18,6 +18,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+
 local brightness_widget = require("brightness")
 local volume_widget = require("volume-widget.volume")
 local battery_widget = require("battery-widget")
@@ -58,7 +61,7 @@ beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
-file_manager = "nautilus"
+file_manager = "thunar"
 gui_editor = "gnome-text-editor"
 editor = os.getenv("gnome-text-editor") or "vi"
 editor_cmd = terminal .. " -e " .. editor
@@ -567,10 +570,10 @@ awful.rules.rules = {
 
     -- Set Firefox to always map on the tag named "firefox" on screen 1.
     { rule = { class = "firefox" },
-    properties = { screen = 1, tag = "" } },
+    properties = { tag = screen[1].tags[1] } },
 
     { rule = { class = "discord" },
-    properties = { screen = 1, tag = "" } },
+    properties = { tag = screen[1].tags[5] } },
 }
 -- }}}
 
