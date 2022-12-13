@@ -4,7 +4,7 @@
 
 ### Required
 ```sh
-sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop
+sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit
 ```
 
 #### Awesome WM

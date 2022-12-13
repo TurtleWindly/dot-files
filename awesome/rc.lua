@@ -62,7 +62,7 @@ beautiful.init("~/.config/awesome/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
 file_manager = "thunar"
-gui_editor = "gnome-text-editor"
+gui_editor = "gedit"
 editor = os.getenv("gnome-text-editor") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 -- Set not to get maximum windows to tile
