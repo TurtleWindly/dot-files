@@ -328,7 +328,7 @@ globalkeys = gears.table.join(
               {description = "open file manager", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "e", awesome.quit,
+    awful.key({ modkey, "Control"   }, "e", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
     -- Rofi
