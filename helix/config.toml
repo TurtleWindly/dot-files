@@ -3,6 +3,7 @@ theme = "tokyonight"
 [editor]
 line-number = "relative"
 mouse = false
+shell = ["zsh", "-c"]
 
 [editor.indent-guides]
 render = true
