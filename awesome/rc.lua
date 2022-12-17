@@ -99,7 +99,7 @@ awful.layout.layouts = {
 -- Create a launcher widget and a main menu
 
 mymainmenu = awful.menu({ items = {
-                                    { "    Note", function() awful.spawn.with_shell(gui_editor.." Text/note.txt") end},
+                                    { "    Note", function() awful.spawn.with_shell(gui_editor.." Text/note.md") end},
                                     { "   Terminal", terminal},
                                     { "   Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end},
                                     { "   Restart", awesome.restart }
@@ -113,9 +113,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock( "%b %d, %H:%M" )
-
--- Volume textbox
-myvolume = awful.widget.watch("amixer sget Master | grep 'Right:' | awk -F '[][]' '{print $2}'| sed 's/[^0-9]//g'")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
