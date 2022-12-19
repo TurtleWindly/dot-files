@@ -9,3 +9,6 @@ shell = ["zsh", "-c"]
 render = true
 character = "▏"
 skip-levels = 1
+
+[keys.insert]
+j = { j = "normal_mode" } # Maps `jk` to exit insert mode
