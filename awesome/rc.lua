@@ -249,7 +249,7 @@ awful.screen.connect_for_each_screen(function(s)
             brightness_widget {
                 type = "icon_and_text",
                 program = "light",
-                step = 2,
+                step = 5,
             },
             volume_widget {
                 widget_type = "icon_and_text",
@@ -605,7 +605,7 @@ beautiful.useless_gap = 5
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("ibus-daemon -d")
 awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("light -S 32")
+awful.spawn.with_shell("light -S 40")
 awful.spawn.with_shell("amixer -D default sset Master 35%")
 -- Polkit agent
 awful.spawn.with_shell("/usr/libexec/polkit-gnome-authentication-agent-1 &")
