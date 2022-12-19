@@ -168,7 +168,9 @@ local function worker(user_args)
     brightness_widget.widget:buttons(
             awful.util.table.join(
                     awful.button({}, 1, function() brightness_widget:set(base) end),
-                    awful.button({}, 3, function() brightness_widget:toggle() end)
+                    awful.button({}, 3, function() brightness_widget:toggle() end),
+                    awful.button({}, 4, function() brightness_widget:inc() end),
+                    awful.button({}, 5, function() brightness_widget:dec() end)
             )
     )
 
