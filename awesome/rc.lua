@@ -605,7 +605,7 @@ beautiful.useless_gap = 5
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("ibus-daemon -d")
 awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("light -S 40")
+awful.spawn.with_shell("light -S 100")
 awful.spawn.with_shell("amixer -D default sset Master 35%")
 -- Polkit agent
 awful.spawn.with_shell("/usr/libexec/polkit-gnome-authentication-agent-1 &")
