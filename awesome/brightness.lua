@@ -42,7 +42,7 @@ local function worker(user_args)
 
     local program = args.program or 'light'
     local step = args.step or 5
-    local base = args.base or 40
+    local base = args.base or 100
     local current_level = 0 -- current brightness value
     local tooltip = args.tooltip or false
     local percentage = args.percentage or false
