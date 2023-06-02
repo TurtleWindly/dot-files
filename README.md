@@ -16,12 +16,7 @@ sudo dnf install awesome rofi picom xset xss-lock polkit-gnome
 Other dependencies should be manually install
 ```sh
 sudo dnf copr enable tokariew/i3lock-color
-sudo dnf install i3lock-color imagemagick xrandr xrdb xdpyinfo
-```
-
-#### Image viewer
-```sh
-sudo dnf install ristretto feh
+sudo dnf install i3lock-color imagemagick xrandr xrdb xdpyinfo feh -y
 ```
 
 #### GoogleDrive
@@ -38,21 +33,10 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 flatpak install flathub org.gnome.FontManager
 ```
 
-#### unikey
+#### unikey, LXAppearance, Icon theme , Image Viewer
 ```sh
-sudo dnf install ibus-unikey
+sudo dnf install ibus-unikey lxappearance papirus-icon-theme ristretto feh
 ```
-
-#### icon theme
-```sh
-sudo dnf install papirus-icon-theme
-```
-
-#### LXAppearance
-```sh
-sudo dnf install lxappearance
-```
-
 
 ## ScreenShot
 ![desktop](.ScreenShot/desktop.png)
