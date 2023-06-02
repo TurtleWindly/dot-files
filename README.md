@@ -16,7 +16,8 @@ sudo dnf install awesome rofi picom xset xss-lock polkit-gnome
 Other dependencies should be manually install
 ```sh
 sudo dnf copr enable tokariew/i3lock-color
-sudo dnf install i3lock-color imagemagick xrandr xrdb xdpyinfo feh -y
+sudo dnf install i3lock-color ImageMagick xrandr xrdb xdpyinfo feh -y
+wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
 ```
 
 #### GoogleDrive
