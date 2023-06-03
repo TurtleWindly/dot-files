@@ -18,6 +18,9 @@ Other dependencies should be manually install
 sudo dnf copr enable tokariew/i3lock-color
 sudo dnf install i3lock-color ImageMagick xrandr xrdb xdpyinfo feh -y
 wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+
+# Adding image to betterlockscreen cache
+betterlockscreen -u ~/.config/awesome/Onodera.jpg
 ```
 
 #### GoogleDrive
