@@ -1,0 +1,11 @@
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="acustom"
+
+plugins=(elapsed_time)
+
+source $ZSH/oh-my-zsh.sh
+
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -lA"
+alias laz="lazygit"
