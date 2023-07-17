@@ -4,7 +4,7 @@
 
 ### Required
 ```sh
-sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit ffmpeg-free zsh sqlite
+sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit ffmpeg-free zsh sqlite cava cmatrix neofetch
 ```
 
 #### Awesome WM
@@ -23,10 +23,21 @@ wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/in
 betterlockscreen -u ~/.config/awesome/Onodera.jpg
 ```
 
+#### Helix
+```sh
+sudo dnf copr enable varlad/helix
+sudo dnf install helix
+```
+
 #### Lazygit
 ``sh
 sudo dnf copr enable atim/lazygit
 sudo dnf install lazygit
+```
+
+#### Oh my zsh
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 #### Flatpak
