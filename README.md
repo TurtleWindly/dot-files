@@ -4,7 +4,7 @@
 
 ### Required
 ```sh
-sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit ffmpeg-free zsh sqlite cava cmatrix neofetch
+sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit ffmpeg-free zsh sqlite cava cmatrix neofetch qbittorrent
 ```
 
 #### Awesome WM
