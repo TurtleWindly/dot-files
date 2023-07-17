@@ -4,7 +4,7 @@
 
 ### Required
 ```sh
-sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit
+sudo dnf install scrot terminator nodejs light alsa-plugins-pulseaudio pavucontrol thunar btop gedit ffmpeg-free zsh sqlite
 ```
 
 #### Awesome WM
@@ -23,9 +23,10 @@ wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/in
 betterlockscreen -u ~/.config/awesome/Onodera.jpg
 ```
 
-#### GoogleDrive
-```sh
-sudo dnf install rclone rclone-browser
+#### Lazygit
+``sh
+sudo dnf copr enable atim/lazygit
+sudo dnf install lazygit
 ```
 
 #### Flatpak
