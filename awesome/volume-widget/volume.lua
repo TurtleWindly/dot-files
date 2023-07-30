@@ -18,11 +18,23 @@ local utils = require("volume-widget.utils")
 -- Battery 'popup'
 local naughty = require("naughty")
 
+local volume_ny
+local isNotificate = false
+
+local function updateNotificationState()
+    isNotificate = false
+end
+
 local function volume_popup(title, text)
-    naughty.notify({
+    if isNotificate then
+        naughty.destroy(volume_ny)
+    end
+    isNotificate = true
+    volume_ny = naughty.notify({
         title = title,
         text  = text,
         timeout = 0.5,
+        destroy = updateNotificationState,
     })
 end
 
