@@ -20,6 +20,7 @@ local naughty = require("naughty")
 
 local volume_ny
 local isNotificate = false
+local time_out = 0.5
 
 local function updateNotificationState()
     isNotificate = false
@@ -27,13 +28,16 @@ end
 
 local function volume_popup(title, text)
     if isNotificate then
-        naughty.destroy(volume_ny)
+        -- naughty.destroy(volume_ny)
+        naughty.replace_text(volume_ny, title, text)
+        naughty.reset_timeout(volume_ny, time_out)
+        return
     end
     isNotificate = true
     volume_ny = naughty.notify({
         title = title,
         text  = text,
-        timeout = 0.5,
+        timeout = time_out,
         destroy = updateNotificationState,
     })
 end
