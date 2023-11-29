@@ -30,6 +30,7 @@ local function worker(user_args)
     local path_to_icon = args.path_to_icon or ICON_DIR .. 'bolt.svg'
     local battery_low = args.battery_low or 20
     local battery_high = args.battery_high or 80
+    local battery_high_ignore = args.battery_high_ignore or 95
 
     battery_widget.widget = wibox.widget {
             {
@@ -64,7 +65,7 @@ local function worker(user_args)
             if capacity < battery_low and is_discharging then
                 battery_notification("Batter is Low !", "You probably need to charge the laptop" )
 		awful.spawn.with_shell("light -S 20")
-            elseif capacity > battery_high and not is_discharging then
+            elseif capacity > battery_high and capacity < battery_high_ignore and not is_discharging then
                 battery_notification("Batter charged completed !", "Unplug to help battery not to go fire !" )
             end
         end)
